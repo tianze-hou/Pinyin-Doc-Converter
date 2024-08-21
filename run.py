@@ -4,7 +4,6 @@ import yaml
 from docx import Document
 import zhconv
 
-# Set up logging
 logging.basicConfig(filename='conversion.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
