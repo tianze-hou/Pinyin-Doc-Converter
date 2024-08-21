@@ -43,7 +43,7 @@ pip install python-docx pyyaml zhconv
 input_file: '/path/to/your/input.docx'
 
 # 输出文件路径，如果留空，则默认在input路径文件名后面加上“SC”（简体中文）或“TC”（繁体）作为输出路径
-output_file: ''  # 留空将使用默认路径
+output_file: ''  # 留空将默认使用同一路径
 
 # 转换类型：1为简转繁，2为繁转简
 conversion_type: 1
