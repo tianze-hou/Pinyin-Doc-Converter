@@ -2,7 +2,7 @@ import os
 import logging
 import yaml
 from docx import Document
-import zhconv
+from opencc import OpenCC
 
 logging.basicConfig(filename='conversion.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -16,11 +16,18 @@ def load_config(config_file):
         logging.error(f"Failed to load config file: {e}")
         raise
 
+# 初始化OpenCC转换器，实现词语级别的转换
+# 初始化OpenCC转换器实例（仅创建一次以提高效率）
+cc_s2hk = OpenCC('s2hk')
+cc_t2s = OpenCC('t2s')
+
 def convert_to_hk_traditional(text):
-    return zhconv.convert(text, 'zh-hant')
+    # 使用opencc的s2hk配置：简体中文转香港繁体（包含词语级转换）
+    return cc_s2hk.convert(text)
 
 def convert_to_simplified(text):
-    return zhconv.convert(text, 'zh-hans')
+    # 使用opencc的t2s配置：繁体中文转简体中文（包含词语级转换）
+    return cc_t2s.convert(text)
 
 def process_run(run, conversion_type):
     ruby_xml = run._r
